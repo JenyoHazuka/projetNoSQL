@@ -1,4 +1,4 @@
-package main.java.com.example;
+package com.example.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class Recherche {
             try (MongoClient mongoClient = MongoClients.create(connectionString)) {
                 List<Document> databases = mongoClient.listDatabases().into(new ArrayList<>());
                 // Ajoutez votre logique de recherche MongoDB ici
-                System.out.println("main.java.com.example.Recherche d'article effectuée pour l'id : " + article.getId());
+                System.out.println("com.example.controllers.Recherche d'article effectuée pour l'id : " + article.getId());
             }
         }
     }
@@ -54,7 +54,7 @@ public class Recherche {
         public String rechercherArticle(@RequestParam int id) {
             Article article = new Article(id);
             rechercheArticle.rechercheArticle(article);
-            return "main.java.com.example.Recherche effectuée";
+            return "com.example.controllers.Recherche effectuée";
         }
     }
 }

@@ -1,4 +1,4 @@
-package main.java.com.example;
+package com.example.controllers;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.*;
 import org.springframework.stereotype.Service;
 import org.bson.Document;
 
@@ -19,13 +20,13 @@ public class InsertionController {
 
     @GetMapping("/insertPage")
     public String afficherPageInsertion() {
-        return "insertion";
+        return "insertPage"; // Utilisez le nom du fichier HTML sans l'extension
     }
 
-    @PostMapping("/inserer")
+    @PostMapping("/inserer/inserer")
     public String insererDonnee(@RequestParam String Namebar, @RequestParam int PriceUniquebar) {
         insertionArticle.insererArticle(Namebar, PriceUniquebar);
-        return "redirect:/";
+        return "redirect:/inserer/insertPage"; // Redirige correctement vers la page d'insertion
     }
 
     @Service
@@ -42,6 +43,8 @@ public class InsertionController {
                 collection.insertOne(document);
 
                 System.out.println("Article inséré : Nom = " + nom + ", Prix = " + prix);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
