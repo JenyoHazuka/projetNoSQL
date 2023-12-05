@@ -7,20 +7,81 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>searchPage</title>
     </head>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-search {
+            display: block;
+            justify-content: center;
+            align-content: center;
+            border: 2px solid black;
+            background-color: lightgrey;
+        }
+
+        .item-search {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .item-cmd {
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .link-insertPage {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            padding-top: 20px;
+        }
+
+        .insertPage{
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 20pt;
+        }
+
+        .insertPage:hover {
+            color: white;
+            border-color: white;
+            background-color: black;
+        }
+    </style>
     <body>
-        <div>
-            <h1>Page de recherche d'article</h1>
-        </div>
-        <form action="/recherche" method="post">
-            <div>
-                <input id="searchbar" onkeyup="search_article()" type="search" name="searchbar" placeholder="Chercher un article...">
+        <div class="container">
+            <div class="tab-container">
+                <div class="item-title">
+                    <h1 class="title">Page de recherche d'article</h1>
+                </div>
+                <form class="form-search" action="/recherche" method="post">
+                    <div class="item-search">
+                        <input class="searchbar" id="searchbar" onkeyup="search_article()" type="search" name="searchbar" placeholder="Chercher un article...">
+                    </div>
+                    <div class="item-cmd">
+                        <input class="cmd-search" type="submit" id="btnSearch" name="btnSearch" value="Rechercher">
+                    </div>
+                </form>
+                <div class="link-insertPage">
+                    <a class="insertPage" href="./insertPage.html">Page saisie d'un article</a>
+                </div>
             </div>
-            <div>
-                <button>Valider</button>
-            </div>
-        </form>
-        <div>
-            <a href="./insertPage.html">Page saisie d'un article</a>
         </div>
     </body>
 </html>
