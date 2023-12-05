@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Page d'insertion</title>
+    </head>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-insert {
+            display: block;
+            justify-content: center;
+            align-content: center;
+            border: 2px solid black;
+            background-color: lightgrey;
+        }
+
+        .block-name, .block-price-unique, .block-cmd {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .block-name, .block-price-unique {
+            justify-content: space-around;
+        }
+
+        .label-name, .label-price-unique {
+            padding-right: 20px;
+            font-size: 15pt;
+        }
+
+        .input-name, .input-price-unique {
+            width: 50%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .cmd-insert {
+            width: 125px;
+            height: 50px;
+            border-radius: 10px;
+            font-size: 1.5em;
+        }
+
+        .link-searchPage {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            padding-top: 20px;
+        }
+
+        .searchPage{
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 20pt;
+        }
+
+        .searchPage:hover {
+            color: white;
+            border-color: white;
+            background-color: black;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="tab-container">
+                <div class="item-title">
+                    <h1 class="title">Page d'insertion d'un article en MongoDB</h1>
+                </div>
+                <form class="form-insert" action="/inserer/inserer" method="post">
+                    <div class="block-name">
+                        <label class="label-name">Nom : </label>
+                        <input class="input-name" id="insertName" type="text" maxlength="20" name="Namebar" required>
+                    </div>
+                    <div class="block-price-unique">
+                        <label class="label-price-unique">Prix unitaire : </label>
+                        <input class="input-price-unique" id="insertPriceUnique" type="number" min="1" max="1000" name="PriceUniquebar" required>
+                    </div>
+                    <div class="block-cmd">
+                        <button class="cmd-insert" id="insertButton" name="insertButton" type="submit">Valider</button>
+                    </div>
+                </form>
+                <div class="link-searchPage">
+                    <a class="searchPage" href="./searchPage.html">Page de recherche</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

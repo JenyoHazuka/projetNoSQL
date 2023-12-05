@@ -20,13 +20,13 @@ public class InsertionController {
 
     @GetMapping("/insertPage")
     public String afficherPageInsertion() {
-        return "insertPage"; // Utilisez le nom du fichier HTML sans l'extension
+        return "insertPage";
     }
 
     @PostMapping("/inserer")
     public String insererDonnee(@RequestParam String Namebar, @RequestParam int PriceUniquebar) {
         insertionArticle.insererArticle(Namebar, PriceUniquebar);
-        return "redirect:/insertPage.html"; // Redirige correctement vers la page d'insertion
+        return "redirect:/insertPage.html";
     }
 
     @Service
