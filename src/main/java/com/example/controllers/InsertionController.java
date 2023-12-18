@@ -1,15 +1,11 @@
 package com.example.controllers;
-
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.example.services.InsertionArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.*;
-import org.springframework.stereotype.Service;
-import org.bson.Document;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/inserer")
@@ -27,25 +23,5 @@ public class InsertionController {
     public String insererDonnee(@RequestParam String Namebar, @RequestParam int PriceUniquebar) {
         insertionArticle.insererArticle(Namebar, PriceUniquebar);
         return "redirect:/insertPage.html";
-    }
-
-    @Service
-    public static class InsertionArticle {
-        public void insererArticle(String nom, int prix) {
-            String connectionString = "mongodb://localhost:27017";
-            try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-                MongoDatabase database = mongoClient.getDatabase("ProjetNOsql");
-                MongoCollection<Document> collection = database.getCollection("ListeArticle");
-
-                Document document = new Document("nom", nom)
-                        .append("prix", prix);
-
-                collection.insertOne(document);
-
-                System.out.println("Article inséré : Nom = " + nom + ", Prix = " + prix);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
