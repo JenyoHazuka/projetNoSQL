@@ -33,22 +33,35 @@ import redis.clients.jedis.Jedis;
         if (jedis == null) {
             initRedis();
         }
+        try {
+            String valeur = jedis.hget("ListeArticle", nom);
 
-        String valeur = jedis.hget("recherche", nom);
-
-        if (valeur != null) {
-            System.out.println("Valeur récupérée : " + valeur);
-            stockerDansRedis(nom, valeur);
-        } else {
-            System.out.println("Aucun résultat trouvé pour : " + nom);
+            if (valeur != null) {
+                System.out.println("Valeur récupérée : " + valeur);
+                stockerDansRedis(nom, effectuerRecherche(nom));
+            } else {
+                System.out.println("Aucun résultat trouvé pour : " + nom);
+                String resultatRecherche = effectuerRecherche(nom);
+                stockerDansRedis(nom, effectuerRecherche(nom));
+                rechercherArticleMongoDB(nom);
+                System.out.println("Résultat stocké dans Redis : " + nom + " => " + resultatRecherche);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private void stockerDansRedis(String nom, String resultat) {
         try {
-            jedis.hset("recherche", nom, resultat);
+            jedis.set(nom, resultat);
+            jedis.expire(nom,3600);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String effectuerRecherche(String nom) {
+
+        return "Résultat de la recherche pour " + nom;
     }
 }
