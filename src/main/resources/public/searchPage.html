@@ -1,87 +1,87 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>searchPage</title>
-    </head>
-    <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>searchPage</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 
-        .title {
-            display: flex;
-            justify-content: center;
-        }
+    .title {
+        display: flex;
+        justify-content: center;
+    }
 
-        .form-search {
-            display: block;
-            justify-content: center;
-            align-content: center;
-            border: 2px solid black;
-            background-color: lightgrey;
-        }
+    .form-search {
+        display: block;
+        justify-content: center;
+        align-content: center;
+        border: 2px solid black;
+        background-color: lightgrey;
+    }
 
-        .item-search {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+    .item-search {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 
-        .item-cmd {
-            padding-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+    .item-cmd {
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 
-        .link-insertPage {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            padding-top: 20px;
-        }
+    .link-insertPage {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding-top: 20px;
+    }
 
-        .insertPage{
-            padding: 10px;
-            text-decoration: none;
-            color: black;
-            border: 2px solid black;
-            border-radius: 10px;
-            font-size: 20pt;
-        }
+    .insertPage{
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+        border: 2px solid black;
+        border-radius: 10px;
+        font-size: 20pt;
+    }
 
-        .insertPage:hover {
-            color: white;
-            border-color: white;
-            background-color: black;
-        }
-    </style>
-    <body>
-        <div class="container">
-            <div class="tab-container">
-                <div class="item-title">
-                    <h1 class="title">Page de recherche d'article</h1>
-                </div>
-                <form class="form-search" action="/recherche/recherche" method="post">
-                    <div class="item-search">
-                        <input class="searchbar" id="searchbar" type="search" name="nom" placeholder="Chercher un article...">
-                    </div>
-                    <div class="item-cmd">
-                        <button class="cmd-search" id="searchButton" name="searchButton" type="submit">Rechercher</button>
-                    </div>
-                </form>
-                <div class="link-insertPage">
-                    <a class="insertPage" href="./insertPage.html">Page saisie d'un article</a>
-                </div>
-            </div>
+    .insertPage:hover {
+        color: white;
+        border-color: white;
+        background-color: black;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="tab-container">
+        <div class="item-title">
+            <h1 class="title">Page de recherche d'article</h1>
         </div>
-    </body>
+        <form class="form-search" action="/recherche/recherche" method="post">
+            <div class="item-search">
+                <input class="searchbar" id="searchbar" type="search" name="nom" placeholder="Chercher un article...">
+            </div>
+            <div class="item-cmd">
+                <button class="cmd-search" type="submit" id="btnSearch" name="btnSearch">Rechercher</button>
+            </div>
+        </form>
+        <div class="link-insertPage">
+            <a class="insertPage" href="./insertPage.html">Page saisie d'un article</a>
+        </div>
+    </div>
+</div>
+</body>
 </html>

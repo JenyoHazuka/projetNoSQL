@@ -1,27 +1,30 @@
 package com.example.services;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.springframework.stereotype.Service;
 import org.bson.Document;
+import org.springframework.stereotype.Service;
 
-    @Service
-    public class InsertionArticle {
-        public void insererArticle(String nom, int prix) {
-            String connectionString = "mongodb://localhost:27017";
-            try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-                MongoDatabase database = mongoClient.getDatabase("ProjetNOsql");
-                MongoCollection<Document> collection = database.getCollection("ListeArticle");
+@Service
+public class InsertionArticle {
 
-                Document document = new Document("nom", nom)
-                        .append("prix", prix);
+    public void insererArticle(String nom, int prix) {
+        String connectionString = "mongodb://localhost:27017";
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            MongoDatabase database = mongoClient.getDatabase("ProjetNOsql");
+            MongoCollection<Document> collection = database.getCollection("ListeArticle");
 
-                collection.insertOne(document);
+            Document document = new Document("nom", nom)
+                    .append("prix", prix);
 
-                System.out.println("Article inséré : Nom = " + nom + ", Prix = " + prix);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            collection.insertOne(document);
+
+            System.out.println("Article inséré : Nom = " + nom + ", Prix = " + prix);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+}

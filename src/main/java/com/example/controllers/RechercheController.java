@@ -1,4 +1,5 @@
 package com.example.controllers;
+
 import com.example.services.RechercheArticle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class RechercheController {
         return "searchPage";
     }
 
+
     @PostMapping("/recherche")
     public String rechercherDonnee(@RequestParam String nom) {
-        rechercheArticle.rechercherArticleRedis(nom);
+        rechercheArticle.rechercherArticleMongoDB(nom);
         return "redirect:/searchPage.html";
     }
 }
-
