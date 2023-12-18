@@ -40,10 +40,12 @@ public class RechercheArticle {
 
             if (valeur != null) {
                 System.out.println("Valeur récupérée : " + valeur);
+                stockerDansRedis(nom, effectuerRecherche(nom));
             } else {
                 System.out.println("Aucun résultat trouvé pour : " + nom);
                 String resultatRecherche = effectuerRecherche(nom);
                 stockerDansRedis(nom, resultatRecherche);
+                rechercherArticleMongoDB(nom);
                 System.out.println("Résultat stocké dans Redis : " + nom + " => " + resultatRecherche);
             }
         } catch (Exception e) {
@@ -53,8 +55,8 @@ public class RechercheArticle {
 
     private void stockerDansRedis(String nom, String resultat) {
         try {
-            jedis.hset("ListeArticle", nom, resultat);
-            jedis.expire("ListeArticle", 3600);
+            jedis.set(nom, resultat);
+            jedis.expire(nom, 3600);
         } catch (Exception e) {
             e.printStackTrace();
         }
