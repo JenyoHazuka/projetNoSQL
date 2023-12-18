@@ -29,7 +29,7 @@ public class RechercheController {
 
     @PostMapping("/recherche")
     public String rechercherDonnee(@RequestParam String nom) {
-        rechercheArticle.rechercherArticleMongoDB(nom);
+        rechercheArticle.rechercherArticleRedis(nom);
         return "redirect:/searchPage.html";
     }
 }

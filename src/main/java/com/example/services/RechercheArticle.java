@@ -9,12 +9,6 @@ import redis.clients.jedis.Jedis;
 @Service
 public class RechercheArticle {
 
-    private  Jedis jedis;
-
-    private void initRedis(){
-        jedis = new Jedis("redis://default:kQ6comKgexGLxxsxx2EJfcs5s9Ig7cp2@redis-13334.c304.europe-west1-2.gce.cloud.redislabs.com:13334");
-    }
-
     public void rechercherArticleMongoDB(String nom) {
         String connectionString = "mongodb://localhost:27017";
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
@@ -31,22 +25,43 @@ public class RechercheArticle {
         }
     }
 
-    /*
+    private Jedis jedis;
+
+    private void initRedis() {
+        jedis = new Jedis("redis://default:kQ6comKgexGLxxsxx2EJfcs5s9Ig7cp2@redis-13334.c304.europe-west1-2.gce.cloud.redislabs.com:13334");
+    }
+
     public void rechercherArticleRedis(String nom) {
-        if(jedis==null){
+        if (jedis == null) {
             initRedis();
         }
-        jedis.set("cle", "valeur");
-        String valeur = jedis.get("searchbar");
-        System.out.println("Valeur récupérée : " + valeur);
+        try {
+            String valeur = jedis.hget("recherche", nom);
+
+            if (valeur != null) {
+                System.out.println("Valeur récupérée : " + valeur);
+            } else {
+                System.out.println("Aucun résultat trouvé pour : " + nom);
+                String resultatRecherche = effectuerRecherche(nom);
+                stockerDansRedis(nom, resultatRecherche);
+                System.out.println("Résultat stocké dans Redis : " + nom + " => " + resultatRecherche);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void stockerDansRedis(String nom, String resultat) {
         try {
-            // Stocker dans Redis
-            jedis.hset("recherche", nom, resultat);
+            jedis.hset("ListeArticle", nom, resultat);
+            jedis.expire("ListeArticle", 3600);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
+
+    private String effectuerRecherche(String nom) {
+
+        return "Résultat de la recherche pour " + nom;
+    }
 }
