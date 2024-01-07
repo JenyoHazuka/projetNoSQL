@@ -89,8 +89,6 @@
 <script>
         function rechercherDonnee() {
             var nom = document.getElementById("searchbar").value;
-
-            // Simulation d'une requête AJAX vers votre backend
             fetch("/recherche/recherche", {
                 method: "POST",
                 headers: {
@@ -108,13 +106,19 @@
         }
 
         function afficherResultats(resultats) {
-            var resultatsContainer = document.getElementById("resultatsContainer");
+             var resultatsContainer = document.getElementById("resultatsContainer");
             resultatsContainer.innerHTML = "<h2>Résultats de la recherche</h2><ul>";
-            resultats.forEach(function(resultat) {
-                resultatsContainer.innerHTML += "<li>" + resultat + "</li>";
-            });
-            resultatsContainer.innerHTML += "</ul>";
-        }
+
+             resultats.forEach(function(resultat) {
+                 var objetResultat = JSON.parse(resultat);
+                 var nom = (objetResultat && objetResultat.nom !== null && objetResultat.nom !== undefined) ? objetResultat.nom : "Nom non disponible";
+                 var prix = (objetResultat && objetResultat.prix !== null && objetResultat.prix !== undefined) ? objetResultat.prix : "Prix non disponible";
+
+             resultatsContainer.innerHTML += "<li>" + "Nom: " + nom + " - " + "Prix: " + prix + "</li>";
+         });
+
+        resultatsContainer.innerHTML += "</ul>";
+}
     </script>
 </body>
 </html>
