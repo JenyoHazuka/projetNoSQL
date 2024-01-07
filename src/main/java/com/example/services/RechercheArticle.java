@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RechercheArticle {
 
-    public void rechercherArticleMongoDB(String nom) {
+    public List<String> rechercherArticleMongoDB(String nom) {
         String connectionString = "mongodb://localhost:27017";
+        List<String> resultats = new ArrayList<>();
+
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
             MongoDatabase database = mongoClient.getDatabase("ProjetNOsql");
             MongoCollection<Document> collection = database.getCollection("ListeArticle");
@@ -18,17 +23,20 @@ public class RechercheArticle {
             FindIterable<Document> result = collection.find(new Document("nom", nom));
             for (Document document : result) {
                 System.out.println("Résultat de la recherche : " + document.toJson());
+                resultats.add(document.toJson());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return resultats;
     }
 
     private Jedis jedis;
 
     private void initRedis() {
-        jedis = new Jedis("redis://default:kQ6comKgexGLxxsxx2EJfcs5s9Ig7cp2@redis-13334.c304.europe-west1-2.gce.cloud.redislabs.com:13334");
+        jedis = new Jedis("redis://default:default@redis-16346.c304.europe-west1-2.gce.cloud.redislabs.com:16346");
     }
 
     public void rechercherArticleRedis(String nom) {

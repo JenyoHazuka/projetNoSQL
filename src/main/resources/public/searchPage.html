@@ -70,7 +70,7 @@
         <div class="item-title">
             <h1 class="title">Page de recherche d'article</h1>
         </div>
-        <form class="form-search" action="/recherche/recherche" method="post">
+        <form class="form-search" onsubmit="rechercherDonnee(); return false;">
             <div class="item-search">
                 <input class="searchbar" id="searchbar" type="search" name="nom" placeholder="Chercher un article...">
             </div>
@@ -78,10 +78,43 @@
                 <button class="cmd-search" type="submit" id="btnSearch" name="btnSearch">Rechercher</button>
             </div>
         </form>
+        <div class="item-list" id="resultatsContainer">
+        </div>
         <div class="link-insertPage">
             <a class="insertPage" href="./insertPage.html">Page saisie d'un article</a>
         </div>
     </div>
 </div>
+
+<script>
+        function rechercherDonnee() {
+            var nom = document.getElementById("searchbar").value;
+
+            // Simulation d'une requête AJAX vers votre backend
+            fetch("/recherche/recherche", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: "nom=" + encodeURIComponent(nom),
+            })
+            .then(response => response.json())
+            .then(resultats => {
+                afficherResultats(resultats);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des résultats', error);
+            });
+        }
+
+        function afficherResultats(resultats) {
+            var resultatsContainer = document.getElementById("resultatsContainer");
+            resultatsContainer.innerHTML = "<h2>Résultats de la recherche</h2><ul>";
+            resultats.forEach(function(resultat) {
+                resultatsContainer.innerHTML += "<li>" + resultat + "</li>";
+            });
+            resultatsContainer.innerHTML += "</ul>";
+        }
+    </script>
 </body>
 </html>
