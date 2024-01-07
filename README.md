@@ -16,3 +16,4 @@ Comment lancer le projet :
 
 Attention :
 Il faut s'assurer aucun projet externe n'interfère.
+De préférence, utiliser des navigateur comme Chrome ou Firefox (Opéra n'aime pas la recherche, il ouvre une page JSON)
