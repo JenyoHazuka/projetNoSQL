@@ -3,6 +3,7 @@ L'équipe est composé de Tony Dary et Nathan Modesto
 BUT 3 Groupe Dev 2
 
 Comment lancer le projet : 
+
 1 - S'assurer d'avoir IntelliJ
 
 2 - Récupérer le projet du Git en le clonant
